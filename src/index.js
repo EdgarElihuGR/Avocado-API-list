@@ -11,6 +11,7 @@ async function fetchData(){
     const response = await fetch(apiURL);
     const data = await response.json();
     allItems = await data.data;
+    const appNode = document.querySelector('#app');
     // Create DOM fragment to avoid live DOM rendering multiple times
     let domFragment = document.createDocumentFragment();
 
@@ -31,10 +32,10 @@ async function fetchData(){
         container.setAttribute("class", "container");
         container.append(imageNode, detailsContainer);
         // Append new container to fragment (Not the live DOM)
-        domFragment.append(container);
+        appNode.append(container);
     })
     // Append the fragment to the live DOM just once (More optimal)
-    document.body.append(domFragment);
+    document.body.append(appNode);
 }
 
 fetchData();
