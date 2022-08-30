@@ -6,6 +6,11 @@
 const apiURL = 'https://platzi-avo.vercel.app/api/avo';
 const domainURL = 'https://platzi-avo.vercel.app'; 
 let allItems = [];
+const updateButton = document.querySelector('#updateDetails');
+const dialog = document.querySelector('#favDialog');
+const confirmBtn = document.querySelector('#confirmBtn');
+const skeleton = document.querySelector('#skeleton');
+/* Listeners */
 
 /* Functions */
 const formatPrice = (price) => {
@@ -19,13 +24,14 @@ const formatPrice = (price) => {
 
 /* Fetch data (async-await) */
 async function fetchData(){
+
     const response = await fetch(apiURL);
     const data = await response.json();
     allItems = await data.data;
     const appNode = document.querySelector('#app');
     appNode.className = 'grid xl:grid-cols-2 gap-4 justify-center px-3';
-    const header = document.querySelector('#header');
-    header.style.backgroundColor = '#779422';
+    // const header = document.querySelector('#header');
+    // header.style.backgroundColor = '#779422';
     // Create DOM fragment to avoid live DOM rendering multiple times
     let domFragment = document.createDocumentFragment();
 
@@ -50,14 +56,18 @@ async function fetchData(){
         detailsContainer.className = 'details-container';
         detailsContainer.className = 'px-6 pt-3 pb-5';
         detailsContainer.append(priceNode, descriptionNode);
+        /* Container */
         const container = document.createElement('div');
         container.className = "container flex flex-column rounded-3xl text-gray-500 hover:bg-gray-300 hover:text-black ease-in duration-200";
+        /* Append item details to container */
         container.append(imageNode, detailsContainer);
         // Append new container to fragment (Not the live DOM)
         appNode.append(container);
     })
     // Append the fragment to the live DOM just once (More optimal)
     document.body.append(appNode);
+    /* Remove page skeleton */
+    skeleton.remove();
 }
 
 fetchData();
