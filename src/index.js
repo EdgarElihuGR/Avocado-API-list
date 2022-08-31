@@ -30,8 +30,6 @@ async function fetchData(){
     allItems = await data.data;
     const appNode = document.querySelector('#app');
     appNode.className = 'grid xl:grid-cols-2 gap-4 justify-center px-3';
-    // const header = document.querySelector('#header');
-    // header.style.backgroundColor = '#779422';
     // Create DOM fragment to avoid live DOM rendering multiple times
     let domFragment = document.createDocumentFragment();
 
@@ -69,5 +67,49 @@ async function fetchData(){
     /* Remove page skeleton */
     skeleton.remove();
 }
-
 fetchData();
+
+/* MDN Async guide */
+// const fetchPromise = fetch(apiURL);
+// const fetchPromise1 = fetch('https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json');
+// const fetchPromise2 = fetch('https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/not-found');
+// const fetchPromise3 = fetch('bad-scheme://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json');
+// const promises = [fetchPromise1, fetchPromise2, fetchPromise3];
+// console.info('/* Promises */');
+
+// Promise.all(promises)
+//     .then((responses) => {
+//         for (const response of responses) {
+//             console.log(`${ response.url }: ${ response.status }`);
+//         }
+//     })
+//     .catch((error) => {
+//         console.error(`Failed to fetch: ${ error }`);
+//     });
+
+    
+// Promise.any(promises)
+//     .then((responses) => {
+//         for (const response of responses) {
+//             console.log(`${ response.url }: ${ response.status }`);
+//         }
+//     })
+//     .catch((error) => {
+//         console.error(`Failed to fetch: ${ error }`);
+//     });
+
+// fetchPromise
+//     .then((response) => {
+//         if(!response.ok){
+//             throw new Error(`HTTP error: ${ response.status }`);
+//         }
+//         return response.json();
+//     })
+//     .then((data) => {
+//         console.log(data.data[0].name);
+//     })
+//     .catch((error) => {
+//         console.error(`Could not get items: ${ error }`);
+//     });
+
+// console.log('Started request...');
