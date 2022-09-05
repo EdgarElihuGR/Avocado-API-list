@@ -5,14 +5,29 @@
 /* Avocados API */
 const apiURL = 'https://platzi-avo.vercel.app/api/avo';
 const domainURL = 'https://platzi-avo.vercel.app'; 
-let allItems = [];
 const updateButton = document.querySelector('#updateDetails');
 const dialog = document.querySelector('#favDialog');
 const confirmBtn = document.querySelector('#confirmBtn');
 const skeleton = document.querySelector('#skeleton');
-/* Listeners */
+const header = document.querySelector('#header');
+const menu = header.querySelector('.menu');
+let allItems = [];
+let selectedMenuOption;
 
 /* Functions */
+const highLightHandler = (event) => {
+    let target = event.target;
+    if(target.nodeName === 'A'){
+        event.preventDefault();
+        console.log('Is an anchor');
+    }
+    if(selectedMenuOption){
+        selectedMenuOption.classList.remove('highlighted');
+    }
+    selectedMenuOption = target;
+    selectedMenuOption.classList.add('highlighted');
+} 
+
 const formatPrice = (price) => {
     const formattedPrice = new window.Intl.NumberFormat("en-EN", {
         style: "currency",
@@ -21,6 +36,9 @@ const formatPrice = (price) => {
 
     return formattedPrice;
 };
+
+/* Listeners */
+menu.addEventListener('click', highLightHandler);
 
 /* Fetch data (async-await) */
 async function fetchData(){
