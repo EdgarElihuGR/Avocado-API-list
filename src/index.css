@@ -5,3 +5,7 @@
 .title-text {
     font-size: 2.5rem;
 }
+
+.highlighted {
+    background-color: #e3cf7a;
+}
